@@ -1,6 +1,35 @@
 @echo off
 title Tweaks v1.0 - Xylit
 
+:: BatchGotAdmin
+:-------------------------------------
+REM  --> Check for permissions
+    IF "%PROCESSOR_ARCHITECTURE%" EQU "amd64" (
+>nul 2>&1 "%SYSTEMROOT%\SysWOW64\cacls.exe" "%SYSTEMROOT%\SysWOW64\config\system"
+) ELSE (
+>nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+)
+
+REM --> If error flag set, we do not have admin.
+if '%errorlevel%' NEQ '0' (
+    echo Requesting administrative privileges...
+    goto UACPrompt
+) else ( goto gotAdmin )
+
+:UACPrompt
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+    set params = %*:"=""
+    echo UAC.ShellExecute "cmd.exe", "/c ""%~s0"" %params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
+
+    "%temp%\getadmin.vbs"
+    del "%temp%\getadmin.vbs"
+    exit /B
+
+:gotAdmin
+    pushd "%CD%"
+    CD /D "%~dp0"
+:--------------------------------------    
+
 :Abfrage
 echo #===================================================================#
 echo #                  _______                 _                        #
@@ -53,13 +82,19 @@ IF %camtasia_auswahl%==2 goto
 echo Falsche Eingabe!
 goto :Camtasia
 
+
+
+
+
 :Camtasia_ResetTrial
 echo Windows Registry Editor Version 5.00 > Camtasia\ResetTrial.reg
 echo [-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\dromjmfile] >> Camtasia\ResetTrial.reg
-elevate reg import Camtasia\ResetTrial.reg
+reg import Camtasia\ResetTrial.reg
 echo Camtasia Testlaufzeit resettet!
 pause
 goto :Abfrage
+
+
 
 
 :Windows_Information
@@ -80,7 +115,7 @@ echo Falsche Eingabe!
 goto :Windows_productID
 
 :Windows_productID_original
-elevate reg import Windows\ProductID\OriginaID.reg
+reg import Windows\ProductID\OriginaID.reg
 echo ProductID wiederhergestellt!
 pause
 goto :Abfrage
@@ -90,7 +125,7 @@ set randomID=%random%-%random%-%random%-%random%-%random%
 echo Windows Registry Editor Version 5.00 > Windows\ProductID\RandomID.reg
 echo [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion] >> Windows\ProductID\RandomID.reg
 echo "ProductId"="%randomID%" >> Windows\ProductID\RandomID.reg
-elevate reg import Windows\ProductID\RandomID.reg
+reg import Windows\ProductID\RandomID.reg
 echo ProductID changed to %randomID%
 pause
 goto :Abfrage
@@ -101,7 +136,7 @@ set /p customID=
 echo Windows Registry Editor Version 5.00 > Windows\ProductID\CustomID.reg
 echo [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion] >> Windows\ProductID\CustomID.reg
 echo "ProductId"="%customID%" >> Windows\ProductID\CustomID.reg
-elevate reg import Windows\ProductID\CustomID.reg
+reg import Windows\ProductID\CustomID.reg
 echo "ProductID changed to %customID%"
 pause
 goto :Abfrage
