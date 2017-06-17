@@ -47,14 +47,16 @@ echo.
 echo.
 echo (0) Windows
 echo (1) Programs
-echo (2) Install Tweaks (under Construction)
-echo (3) Update Tweaks (under Construction)
+echo (2) Games (under Construction)
+echo (3) Install Tweaks (under Construction)
+echo (4) Update Tweaks (under Construction)
 REM --> Scanner to scan the Number youre typed in and open the specific Menu
 set /p auswahl= 
 IF %auswahl%==0 goto :Windows 
-IF %auswahl%==1 goto : Programs
+IF %auswahl%==1 goto :Programs
 IF %auswahl%==2 goto :Abfrage
-IF %auswahl%==2 goto :Abfrage
+IF %auswahl%==3 goto :Abfrage
+IF %auswahl%==4 goto :Abfrage
 cls
 echo Falsche Eingabe!
 goto :Abfrage
@@ -104,6 +106,31 @@ IF %programs_auswahl%==0 goto :Camtasia
 IF %programs_auswahl%==1 goto :Kaspersky
 echo Falsche Eingabe!
 goto :Programs
+
+:Games
+cls
+echo #===================================================================#
+echo #                  _______                 _                        #
+echo #                 ^|__   __^|               ^| ^|                       #
+echo #                    ^| ^|_      _____  __ _^| ^| _____                 #
+echo #                    ^| ^\ \ /\ / / _ \/ _` ^| ^|/ / __^|                #
+echo #                    ^| ^|^\ V  V /  __/ (_^| ^|   ^<\__ \                #
+echo #                    ^|_^| ^\_/\_/ \___^|^\__,_^|_^|^\_\___/                #
+echo #                         Version 1.1 - by Xylit                    #
+echo #===================================================================#
+echo
+echo                                  Games
+echo                             Copy Screenshots
+echo.
+echo (0) CS:GO
+echo (1) Team Fortress 2
+echo (2) FarCry 3
+set /p games_auswahl= 
+IF %games_auswahl%==0 goto :Games_CSGO
+IF %games_auswahl%==1 goto :Games_TeamFortress2
+IF %games_auswahl%==2 goto :Games_FarCry3
+echo Falsche Eingabe!
+goto :Games
 
 :Camtasia
 cls

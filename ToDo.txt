@@ -1,0 +1,20 @@
+Tweaks
+======
+Install Method
+Update Check on Start (and Notify if update avaiable)
+Update Method
+
+
+Games
+======
+Screenshots copy Method
+Add Plugin/Mod install Method
+
+
+Windows
+========
+ProductID Backup Method
+
+
+
+And more...
