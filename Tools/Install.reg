@@ -2,11 +2,11 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall]
 "DisplayName"="Tweaks"
 "DisplayVersion"="1.1"
-"Publisher"="Xylit"
+"Publisher"="KleinDev"
 "VersionMinor"="1.1"
 "VersionMajor"="1.1"
 "Version"="1.1"
-"HelpLink"="https://github.com/MCR-Xylit/Tweaks"
+"HelpLink"="https://github.com/KleinDevDE/Tweaks"
 "HelpTelephone"=""
 "InstallDate"=""
 "InstallLocation"=""
